@@ -1,0 +1,72 @@
+{
+  "name": "decisionmemos",
+  "version": "1.1.0",
+  "description": "Query multiple AI models in parallel — GPT, Claude, Grok, and Gemini in one call. Typed responses, zero boilerplate.",
+  "private": false,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "files": [
+    "dist/src/index.*",
+    "dist/src/multi-model-query.*",
+    "dist/src/types.*",
+    "dist/src/clients/**/*",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "ai",
+    "multi-model",
+    "decisionmemos",
+    "decision-support",
+    "ai-consultation",
+    "consensus",
+    "advisory-panel",
+    "gpt",
+    "claude",
+    "grok",
+    "gemini",
+    "openai",
+    "anthropic",
+    "structured-output"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/projectsmith2913/decisionmemossdk"
+  },
+  "bugs": {
+    "url": "https://github.com/projectsmith2913/decisionmemossdk/issues"
+  },
+  "funding": {
+    "url": "https://decisionmemos.com"
+  },
+  "homepage": "https://decisionmemos.com",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.72.1",
+    "@google/generative-ai": "^0.24.1",
+    "openai": "^6.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
