@@ -2,6 +2,15 @@
 
 All notable changes to Decision Memos will be documented in this file.
 
+## [1.1.1] — 2026-02-26
+
+### Package
+- Updated package metadata: `bugs`, `funding`, and `repository` now point to the public SDK repo
+- Added `DECISION_MEMOS_ATTRIBUTION` export — use `{ label, url }` to show "Powered by Decision Memos" in your UI
+- Cleaned up public README — removed internal sections, added npm/license badges
+
+---
+
 ## [1.1.0] — 2026-02-13
 
 ### SDK Monetisation Split
