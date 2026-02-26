@@ -120,37 +120,22 @@ Every paid memo produces a structured artifact:
 | **The Challenger** | Breaking groupthink | Challenges premises, calls out weak logic |
 | **The Architect** | Structure & implementation | Turns ideas into frameworks with evidence |
 
-## Brand & design system (source of truth)
-
-If you’re making **any** design, UI, or copy decision, start here:
-
-- `docs/BRAND.md`
-
-## Project Structure
+## SDK Structure
 
 ```
-decisionmemos/
-  src/                    # SDK source
-    index.ts              # Public API (free tier exports)
-    multi-model-query.ts  # MultiModelQuery class
-    types.ts              # TypeScript interfaces
-    clients/              # AI provider clients
-    engine/               # Deliberation engine (paid API only)
-    personas.ts           # Advisor archetypes (paid API only)
-  api/                    # Hosted API server
-    src/
-      server.ts           # Express server
-      auth.ts             # API key authentication
-      metering.ts         # Rate limits, quotas, BYOK discount
-      sse.ts              # Streaming helpers
-      routes/             # API endpoints
-  web/                    # Next.js landing + SaaS app
-  bin/                    # CLI tools (internal)
+src/
+  index.ts              # Public exports
+  multi-model-query.ts  # MultiModelQuery class
+  types.ts              # TypeScript interfaces
+  constants.ts          # Shared constants
+  clients/              # AI provider clients
+    openai-client.ts
+    anthropic-client.ts
+    xai-client.ts       # Grok
+    google-client.ts    # Gemini
+    model-interface.ts  # BaseModelClient + retry logic
+    index.ts
 ```
-
-## Production (Vercel + Railway)
-
-Before go-live, set spending limits and follow the **rate limiting & caching** checklist so bots and traffic spikes don’t cause surprise bills: **[docs/RATE-LIMITING-AND-CACHING.md](docs/RATE-LIMITING-AND-CACHING.md)**.
 
 ## Documentation
 
@@ -163,38 +148,15 @@ Full documentation at [decisionmemos.com/docs](https://decisionmemos.com/docs):
 - [Streaming Guide](https://decisionmemos.com/docs/guides/streaming)
 - [Concepts](https://decisionmemos.com/docs/concepts)
 
-For maintainers: GitHub repo description, topics, and npm publish steps are in [docs/GITHUB-NPM-SETUP.md](docs/GITHUB-NPM-SETUP.md).
-
-## Testing as a live user
-
-You can run the full memo flow end-to-end locally:
-
-1. **Start the API server** (needs provider API keys in `.env`):
-   ```bash
-   cd api
-   npm install
-   npm run dev    # listens on http://localhost:4000
-   ```
-
-2. **Set environment variables** for the web app:
-   ```bash
-   # web/.env.local
-   NEXT_PUBLIC_API_URL=http://localhost:4000
-   NEXT_PUBLIC_DM_API_KEY=dm_test_dev_key_001
-   ```
-   The dev test key (`dm_test_dev_key_001`) is seeded automatically in `api/src/auth.ts`.
-
-3. **Start the web app**:
-   ```bash
-   cd web
-   npm run dev    # listens on http://localhost:3000
-   ```
-
-4. **Use it**: Go to [http://localhost:3000/app/new](http://localhost:3000/app/new), enter a question, answer the briefing, and watch a real deliberation. When `NEXT_PUBLIC_API_URL` is not set, the app falls back to mock data so the UI is always testable.
-
 ## Attribution
 
-If you ship the free SDK in your product, we'd appreciate a link: [Powered by Decision Memos](https://decisionmemos.com). You can use the exported `DECISION_MEMOS_ATTRIBUTION` constant for a consistent label and URL (see [SDK Reference](https://decisionmemos.com/docs/sdk)).
+If you ship the free SDK in your product, we'd appreciate a link: [Powered by Decision Memos](https://decisionmemos.com). You can use the exported `DECISION_MEMOS_ATTRIBUTION` constant for a consistent label and URL:
+
+```typescript
+import { DECISION_MEMOS_ATTRIBUTION } from 'decisionmemos';
+
+// { label: 'Powered by Decision Memos', url: 'https://decisionmemos.com' }
+```
 
 ## License
 
