@@ -1,6 +1,6 @@
 {
   "name": "decisionmemos",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Query multiple AI models in parallel — GPT, Claude, Grok, and Gemini in one call. Typed responses, zero boilerplate.",
   "private": false,
   "type": "module",
